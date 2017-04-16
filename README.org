@@ -274,3 +274,152 @@
 
 
 ** 章节列表
+   #+BEGIN_SRC restclient
+     :view = chapters
+     :source-id = 571155c9f3ddaf23050e53b4
+
+     GET http://api.zhuishushenqi.com/toc/:source-id?view=:view
+   #+END_SRC
+
+   #+RESULTS:
+   #+BEGIN_SRC js
+   {
+     "_id": "571155c9f3ddaf23050e53b4",
+     "link": "http://www.hunhun520.com/book/xueyinglingzhu/",
+     "name": "混混小说网",
+     "chapters": [
+       {
+         "title": "第一章 雪鹰领",
+         "link": "http://www.hunhun520.com/book/xueyinglingzhu/14761434.html",
+         "currency": 0,
+         "unreadble": false,
+         "isVip": false
+       },
+       {
+         "title": "第二章 超凡",
+         "link": "http://www.hunhun520.com/book/xueyinglingzhu/14761435.html",
+         "currency": 0,
+         "unreadble": false,
+         "isVip": false
+       },
+       {
+         "title": "第三章 分离",
+         "link": "http://www.hunhun520.com/book/xueyinglingzhu/14761436.html",
+         "currency": 0,
+         "unreadble": false,
+         "isVip": false
+       },
+       {
+         "title": "第四章 兄弟",
+         "link": "http://www.hunhun520.com/book/xueyinglingzhu/14761437.html",
+         "currency": 0,
+         "unreadble": false,
+         "isVip": false
+       }
+     ],
+     "updated": "2017-04-15T17:40:16.946Z",
+     "host": "hunhun520.com"
+   }
+   // GET http://api.zhuishushenqi.com/toc/571155c9f3ddaf23050e53b4?view=chapters
+   // HTTP/1.1 200 OK
+   // X-Backend-Server: backend10-22947
+   // X-REQ-ID: 107b80c0-22af-11e7-880a-03ca79ac220d
+   // Cache-Control: s-maxage=600, no-cache
+   // Last-Modified: Sat, 15 Apr 2017 17:40:16 GMT
+   // ETag: W/"31601-fFjY73bsHcIU6jKXdBhZBw"
+   // X-Response-Time: 77.474ms
+   // Date: Sun, 16 Apr 2017 14:14:54 GMT
+   // Content-Type: application/json; charset=utf-8
+   // Vary: Accept-Encoding
+   // x-url: /toc/571155c9f3ddaf23050e53b4?view=chapters
+   // X-Varnish: 837586251 779148816
+   // Age: 474
+   // Via: 1.1 varnish-v4
+   // X-Cache: HIT
+   // X-Cache-Hits: 86
+   // X-Cache-Server: cache7
+   // Accept-Ranges: bytes
+   // Content-Length: 202241
+   // Access-Control-Allow-Methods: GET,POST,PUT,DELETE
+   // Request duration: 0.253400s
+   #+END_SRC
+
+
+** 混合章节列表
+   #+BEGIN_SRC restclient
+     :book-id = 557e0b2bdcfc794e1a1cd8b2
+
+     GET http://api.zhuishushenqi.com/mix-toc/:book-id
+   #+END_SRC
+
+   #+RESULTS:
+   #+BEGIN_SRC js
+   {
+     "mixToc": {
+       "_id": "557e35d6e8e4599f7b3f7d8d",
+       "book": "557e0b2bdcfc794e1a1cd8b2",
+       "chaptersCount1": 759,
+       "chaptersUpdated": "2017-04-13T22:45:00.529Z",
+       "chapters": [
+         {
+           "title": "第一章 雪鹰领",
+           "link": "http://www.biquge.la/book/5094/3118156.html",
+           "unreadble": false
+         },
+         {
+           "title": "第二章 超凡",
+           "link": "http://www.biquge.la/book/5094/3118157.html",
+           "unreadble": false
+         },
+         {
+           "title": "第三章 分离",
+           "link": "http://www.biquge.la/book/5094/3118548.html",
+           "unreadble": false
+         },
+         {
+           "title": "第四章 兄弟",
+           "link": "http://www.biquge.la/book/5094/3178349.html",
+           "unreadble": false
+         },
+         {
+           "title": "第五章 枪法",
+           "link": "http://www.biquge.la/book/5094/3230812.html",
+           "unreadble": false
+         },
+         {
+           "title": "第六章 修炼",
+           "link": "http://www.biquge.la/book/5094/3277681.html",
+           "unreadble": false
+         },
+         {
+           "title": "第七章 长风骑士",
+           "link": "http://www.biquge.la/book/5094/3288098.html",
+           "unreadble": false
+         }
+       ],
+       "updated": "2017-04-13T22:45:00.529Z"
+     },
+     "ok": true
+   }
+   // GET http://api.zhuishushenqi.com/mix-toc/557e0b2bdcfc794e1a1cd8b2?start=0&limit=4
+   // HTTP/1.1 200 OK
+   // X-Backend-Server: backend27-5271
+   // X-REQ-ID: b59419e0-22b0-11e7-a810-a3326d8e35bf
+   // Cache-Control: s-maxage=300, no-cache
+   // Last-Modified: Thu, 13 Apr 2017 22:45:00 GMT
+   // Content-Type: application/json; charset=utf-8
+   // ETag: W/"24526-o72NncAuu6t0Z71NJ5Csiw"
+   // Vary: Accept-Encoding
+   // X-Response-Time: 66.783ms
+   // Date: Sun, 16 Apr 2017 14:26:41 GMT
+   // x-url: /mix-toc/557e0b2bdcfc794e1a1cd8b2?start=0&limit=4
+   // X-Varnish: 590058666
+   // Age: 0
+   // Via: 1.1 varnish-v4
+   // X-Cache: MISS
+   // X-Cache-Server: cache14
+   // Accept-Ranges: bytes
+   // Transfer-Encoding: chunked
+   // Access-Control-Allow-Methods: GET,POST,PUT,DELETE
+   // Request duration: 0.858376s
+   #+END_SRC
