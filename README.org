@@ -1,0 +1,276 @@
+#+TITLE: 追书神器
+
+* api
+** 自动补全书名
+   #+BEGIN_SRC restclient
+     :query = 雪鹰
+
+     GET http://api.zhuishushenqi.com/book/auto-complete?query=:query
+   #+END_SRC
+
+   #+RESULTS:
+   #+BEGIN_SRC js
+   {
+     "keywords": [
+       "雪鹰领主"
+     ],
+     "ok": true
+   }
+   // GET http://api.zhuishushenqi.com/book/auto-complete?query=雪鹰
+   // HTTP/1.1 200 OK
+   // X-Backend-Server: backend10-22969
+   // X-REQ-ID: ea2522e0-22a5-11e7-9889-996eae3a9a5a
+   // Cache-Control: s-maxage=3600
+   // ETag: W/"27-BGXIMbYkPeKll8Qnm0dRsw"
+   // X-Response-Time: 5.562ms
+   // Date: Sun, 16 Apr 2017 13:09:25 GMT
+   // Content-Type: application/json; charset=utf-8
+   // Content-Length: 39
+   // Vary: Accept-Encoding
+   // x-url: /book/auto-complete?query=%E9%9B%AA%E9%B9%B0
+   // X-Varnish: 811526815 769982079
+   // Age: 3134
+   // Via: 1.1 varnish-v4
+   // X-Cache: HIT
+   // X-Cache-Hits: 42
+   // X-Cache-Server: cache7
+   // Accept-Ranges: bytes
+   // Access-Control-Allow-Methods: GET,POST,PUT,DELETE
+   // Request duration: 0.037987s
+   #+END_SRC
+
+
+** 搜索书籍
+   #+BEGIN_SRC restclient
+     :query = 雪鹰领主
+     :start = 0
+     :limit = 1
+
+     GET http://api.zhuishushenqi.com/book/fuzzy-search?query=:query&start=:start&limit=:limit
+   #+END_SRC
+
+   #+RESULTS:
+   #+BEGIN_SRC js
+   {
+     "books": [
+       {
+         "_id": "557e0b2bdcfc794e1a1cd8b2",
+         "hasCp": true,
+         "title": "雪鹰领主",
+         "cat": "玄幻",
+         "author": "我吃西红柿",
+         "site": "zhuishuvip",
+         "cover": "/cover/147521131159596",
+         "shortIntro": "深渊恶魔降临…… 异世界来客潜伏人间…… 神灵们在窥伺这座世界…… 然而，这是夏族统治的世界！夏族的强者们征战四方，巡守天地海洋，灭杀一切威胁！ 这群强者有一个...",
+         "lastChapter": "第1223章 谁是飞雪帝君？",
+         "retentionRatio": 67.03,
+         "latelyFollower": 138037,
+         "wordCount": 3260960
+       }
+     ],
+     "ok": true
+   }
+   // GET http://api.zhuishushenqi.com/book/fuzzy-search?query=雪鹰领主&start=0&limit=1
+   // HTTP/1.1 200 OK
+   // X-Backend-Server: backend13-8763
+   // X-REQ-ID: 2ae60880-22ab-11e7-86b1-0f2bfd4da786
+   // Cache-Control: s-maxage=1800
+   // Content-Type: application/json; charset=utf-8
+   // Content-Length: 554
+   // ETag: W/"22a-ItzLtcILjlWQhBYDhtVd9A"
+   // Vary: Accept-Encoding
+   // X-Response-Time: 46.811ms
+   // Date: Sun, 16 Apr 2017 13:47:01 GMT
+   // x-url: /book/fuzzy-search?query=%E9%9B%AA%E9%B9%B0%E9%A2%86%E4%B8%BB&start=0&limit=1
+   // X-Varnish: 920686781 1033093338
+   // Age: 813
+   // Via: 1.1 varnish-v4
+   // X-Cache: HIT
+   // X-Cache-Hits: 1
+   // X-Cache-Server: cache15
+   // Accept-Ranges: bytes
+   // Access-Control-Allow-Methods: GET,POST,PUT,DELETE
+   // Request duration: 0.031433s
+   #+END_SRC
+
+
+** 书籍详情
+   #+BEGIN_SRC restclient
+     :book-id = 557e0b2bdcfc794e1a1cd8b2
+
+     GET http://api.zhuishushenqi.com/book/:book-id
+   #+END_SRC
+
+   #+RESULTS:
+   #+BEGIN_SRC js
+   {
+     "_id": "557e0b2bdcfc794e1a1cd8b2",
+     "title": "雪鹰领主",
+     "author": "我吃西红柿",
+     "longIntro": "深渊恶魔降临……\r\n异世界来客潜伏人间……\r\n神灵们在窥伺这座世界……\r\n然而，这是夏族统治的世界！夏族的强者们征战四方，巡守天地海洋，灭杀一切威胁！\r\n这群强者有一个共同的名字——超凡生命！\r\n……\r\n在夏族的安阳行省，有一个很小很不起眼的领地，叫——雪鹰领！\r\n故事，就从这里开始！\r\n**\r\n继《莽荒纪》《吞噬星空》《九鼎记》《盘龙》《星辰变》《寸芒》《星峰传说》后，番茄的第八本小说！",
+     "cover": "/cover/147521131159596",
+     "cat": "异界大陆",
+     "creater": "Xiaomi MI 2S",
+     "majorCate": "玄幻",
+     "minorCate": "异界大陆",
+     "_le": false,
+     "allowMonthly": false,
+     "allowVoucher": true,
+     "allowBeanVoucher": false,
+     "hasCp": true,
+     "postCount": 30108,
+     "latelyFollower": 138037,
+     "followerCount": 0,
+     "wordCount": 3260960,
+     "serializeWordCount": 4982,
+     "retentionRatio": "67.03",
+     "updated": "2017-04-15T15:54:28.082Z",
+     "isSerial": true,
+     "chaptersCount": 1220,
+     "lastChapter": "第1223章 谁是飞雪帝君？",
+     "gender": [
+       "male"
+     ],
+     "tags": [
+       "玄幻",
+       "异界大陆"
+     ],
+     "donate": false,
+     "copyright": "阅文集团正版授权"
+   }
+   // GET http://api.zhuishushenqi.com/book/557e0b2bdcfc794e1a1cd8b2
+   // HTTP/1.1 200 OK
+   // X-Backend-Server: backend28-8566
+   // X-REQ-ID: 7da99100-228c-11e7-815b-c7bf54c299e6
+   // Last-Modified: Sat, 15 Apr 2017 15:54:28 GMT
+   // Cache-Control: no-cache, s-maxage=21600
+   // Content-Type: application/json; charset=utf-8
+   // ETag: W/"4da-/7z/YmQHqmC46wBkgfYrAg"
+   // Vary: Accept-Encoding
+   // X-Response-Time: 228.021ms
+   // Date: Sun, 16 Apr 2017 10:07:25 GMT
+   // x-url: /book/557e0b2bdcfc794e1a1cd8b2
+   // X-Varnish: 393140932 399116971
+   // Age: 13921
+   // Via: 1.1 varnish-v4
+   // X-Cache: HIT
+   // X-Cache-Hits: 4241
+   // X-Cache-Server: cache11
+   // Accept-Ranges: bytes
+   // Content-Length: 1242
+   // Access-Control-Allow-Methods: GET,POST,PUT,DELETE
+   // Request duration: 0.015591s
+   #+END_SRC
+
+
+** 书源信息
+   #+BEGIN_SRC restclient
+     :view = summary
+     :book-id = 557e0b2bdcfc794e1a1cd8b2
+
+     GET http://api.zhuishushenqi.com/toc?view=:view&book=:book-id
+   #+END_SRC
+
+   #+RESULTS:
+   #+BEGIN_SRC js
+   [
+     {
+       "_id": "56ea51cc7393690a39a1ea77",
+       "source": "zhuishuvip",
+       "name": "优质书源",
+       "link": "http://vip.zhuishushenqi.com/toc/56ea51cc7393690a39a1ea77",
+       "lastChapter": "第1223章 谁是飞雪帝君？",
+       "isCharge": false,
+       "chaptersCount": 1220,
+       "updated": "2017-04-15T15:54:28.082Z",
+       "starting": true,
+       "host": "vip.zhuishushenqi.com"
+     },
+     {
+       "_id": "571155c9f3ddaf23050e53b4",
+       "lastChapter": "第36篇 第25章 谁是飞雪帝君？",
+       "link": "http://www.hunhun520.com/book/xueyinglingzhu/",
+       "source": "hunhun",
+       "name": "混混小说网",
+       "isCharge": false,
+       "chaptersCount": 1246,
+       "updated": "2017-04-15T17:40:16.946Z",
+       "starting": false,
+       "host": "hunhun520.com"
+     },
+     {
+       "_id": "585994dae48a78bc2a8c56b7",
+       "lastChapter": "第36篇 第25章 谁是飞雪帝君？",
+       "link": "http://www.79xs.com/Html/Book/123/123138/Index.html",
+       "source": "shuhaha",
+       "name": "79小说网",
+       "isCharge": false,
+       "chaptersCount": 1239,
+       "updated": "2017-04-15T16:17:47.113Z",
+       "starting": false,
+       "host": "79xs.com"
+     }
+   ]
+   // GET http://api.zhuishushenqi.com/toc?view=summary&book=557e0b2bdcfc794e1a1cd8b2
+   // HTTP/1.1 200 OK
+   // X-Backend-Server: backend27-5002
+   // X-REQ-ID: cdbef560-22ad-11e7-8a7c-ff1bb7c26a73
+   // Last-Modified: Sat, 15 Apr 2017 17:40:16 GMT
+   // Cache-Control: no-cache, s-maxage=600
+   // ETag: W/"10a1-nAFUHBICZRRaIiuVhLAU5A"
+   // X-Response-Time: 27.468ms
+   // Date: Sun, 16 Apr 2017 14:05:53 GMT
+   // Content-Type: application/json; charset=utf-8
+   // Vary: Accept-Encoding
+   // x-url: /toc?view=summary&book=557e0b2bdcfc794e1a1cd8b2
+   // X-Varnish: 236999323 423910521
+   // Age: 69
+   // Via: 1.1 varnish-v4
+   // X-Cache: HIT
+   // X-Cache-Hits: 94
+   // X-Cache-Server: cache8
+   // Accept-Ranges: bytes
+   // Content-Length: 4257
+   // Access-Control-Allow-Methods: GET,POST,PUT,DELETE
+   // Request duration: 0.046845s
+   #+END_SRC
+
+
+** 章节详情
+   #+BEGIN_SRC restclient
+     :chapter_link = http%3a%2f%2fbook.my716.com%2fgetBooks.aspx%3fmethod%3dcontent%26bookId%3d1127281%26chapterFile%3dU_1212539_201701211420571844_4093_2.txt
+     :k = 2124b73d7e2e1945
+     :t = 1468223717
+
+     GET http://chapter2.zhuishushenqi.com/chapter/:chapter_link?k=:k&t=:t
+   #+END_SRC
+
+   #+RESULTS:
+   #+BEGIN_SRC js
+   {
+     "ok": true,
+     "chapter": {
+       "title": ".",
+       "body": "第二章\n灵溪宗，位于东林洲内，属于通天河的下游支脉所在，立足通天河南北两岸，至今已有万年历史，震慑四方。\n八座云雾缭绕的惊天山峰，横在通天河上，其中北岸有四座山峰，南岸三座，至于中间的通天河上，赫然有一座最为磅礴的山峰。\n此山从中段开始就白雪皑皑，竟看不清尽头，只能看到下半部的山体被掏空，使得金色的河水奔腾而过，如同一座山桥。\n此刻，灵溪宗南岸外，一道长虹疾驰而来，其内中年修士李青候带着白小纯，没入第三峰下的杂役区域，隐隐还可听到长虹内白小纯的惨叫传出。\n白小纯觉得自己要被吓死了，一路飞行，他看到了无数大山，好几次都觉得自己要抓不住对方的大腿。\n眼下面前一花，当清晰时，已到了一处阁楼外，落在了地上后，他双腿颤抖，看着四周与村子里完全不同的世界。\n前方的阁楼旁，竖着一块大石，上面写着龙飞凤舞的三个大字。\n杂役处。\n大石旁坐着一个麻脸女子，眼看李青候到来，立刻起身拜见。\n“将此子送火灶房去。”李青候留下一句话，没有理会白小纯，转身化作长虹远去。\n麻脸女子听到火灶房三字后一怔，目光扫了白小纯一眼，给了白小纯一个宗门杂役的布袋，面无表情的交代一番，便带着白小纯走出阁楼，一路庭院林立，阁楼无数，青石铺路，还有花草清香，如同仙境，看的白小纯心驰荡漾，心底的紧张与忐忑也少了几分。\n“好地方啊，这里可比村子里好多了啊。”白小纯目中露出期待，随着走去，越是向前，四周的美景就越发的美奂绝伦，甚至他还看到一些样子秀美的女子时而路过，让白小纯对于这里，一下子就喜欢的不得了。\n片刻后，白小纯更高兴了，尤其是前方尽头，他看到了一处七层的阁楼，通体晶莹剔透，甚至天空还有仙鹤飞过。\n“师姐，我们到了吧？”白小纯顿时激动的问道。\n“恩，就在那。”麻脸女子依旧面无表情，淡淡开口，一指旁侧的小路。\n白小纯顺着对方所指，满怀期待的看去时，整个人僵住，揉了揉眼睛仔细去看，只见那条小路上，地面多处碎裂，四周更是破破烂烂，几件草房似随时可以坍塌，甚至还有一些怪味从那里飘出……\n白小纯欲哭无泪，抱着最后一丝希望，问了麻脸女子一句。\n“师姐，你指错了吧……”\n“没有。”麻脸女子淡淡开口，当先走上这条小路，白小纯听后，觉得一切美好瞬间坍塌，苦着脸跟了过去。\n没走多远，他就看到这条破破烂烂的小路尽头，有几口大黑锅窜来窜去，仔细一看，那每一口大黑锅下面，都有一个大胖子，脑满肠肥，似乎一挤都可以流油，不是一般的胖，尤其是里面一个最胖的家伙，跟个肉山似的，白小纯都担心能不能爆了。\n那几个胖子的四周，有几百口大锅，这些胖子正在添水放米。\n察觉有人到来，尤其是看到了麻脸女子，那肉山立刻一脸惊喜，拎着大勺，横着就跑了过来，地面都颤了，一身肥膘抖动出无数波澜，白小纯目瞪口呆，下意识的要在身边找斧头。\n“今早小生听到喜鹊在叫，原来是姐姐你来了，莫非姐姐你已回心转意，觉得我有几分才气，趁着今天良辰，要与小生结成道侣。”肉山目中露出色眯眯的光芒，激动的边跑边喊。\n“我送此子加入你们火灶房，人已带到，告辞！”麻脸女子在看到肉山后，面色极为难看，还有几分恼怒，赶紧后退。\n白小纯倒吸口气，那麻脸女子一路上他就留意了，那相貌简直就是鬼斧神工，眼前这大胖子什么口味，居然这样也能一脸色相。\n还没等白小纯想完，那肉山就呼的一声，出现在了他的面前，直接就将阳光遮盖，把白小纯笼罩在了阴影下。\n白小纯抬头看着面前这庞大无比，身上的肉还在颤动的胖子，努力咽了口唾沫，这么胖的人，他还是头一次看到。\n肉山满脸幽怨的将目光从远处麻脸女子离去的方向收回，扫了眼白小纯。\n“嗬呦，居然来新人了，能把原本安排好的许宝财挤下去，不简单啊。”\n“师兄，在下……在下白小纯……”白小纯觉得对方魁梧的身体，让自己压力太大，下意识的退后几步。\n“白小纯？恩……皮肤白，小巧玲珑，模样还很清纯，不错不错，你的名字起的很符合我的口味嘛。”肉山眼睛一亮，拍下了白小纯的肩膀，一下子差点把白小纯直接拍倒。\n“不知师兄大名是？”白小纯倒吸口气，翻了个白眼，鄙夷的看了眼肉山，心底琢磨着也拿对方的名字玩一玩。\n“我叫张大胖，那个是黄二胖，还有黑三胖……”肉山嘿嘿一笑。\n白小纯听到这几个名字，大感人如其名，立刻没了玩一玩的想法。\n“至于你，以后就叫白九……小师弟，你太瘦了！这样出去会丢我们火灶坊的脸啊，不过也没关系，放心好了，最多一年，你也会胖的，以后你就叫白九胖。”张大胖一拍胸口，肥肉乱颤。\n听到白九胖这三个字，白小纯脸都挤出苦水了。\n“既然你已经是九师弟了，那就不是外人了，咱们火灶房向来有背锅的传统，看到我背后这这口锅了吧，它是锅中之王，铁精打造，刻着地火阵法，用这口锅煮出的灵米，味道超出寻常的锅太多太多。你也要去选一口，以后背在身上，那才威风。”张大胖拍了下背后的大黑锅，吹嘘的开口。\n“师兄，背锅的事，我能不能算了……”白小纯瞄了眼张大胖背后的锅，顿时有种火灶房的人，都是背锅的感觉，脑海里想了一下自己背一口大黑锅的样子，连忙说道。\n“那怎么行，背锅是我们火灶房的传统，你以后在宗门内，别人只要看到你背着锅，知道你是火灶房的人，就不敢欺负你，咱们火灶房可是很有来头的！”张大胖向白小纯眨了眨眼，不由分说，拎着白小纯就来到草屋后面，那里密密麻麻叠放着数千口大锅，其中绝大多数都落下厚厚一层灰，显然很久都没人过来。\n“九师弟，你选一口，我们去煮饭了，不然饭糊了，那些外门弟子又要嚷嚷了。”张大胖喊了一声，转身与其他几个胖子，又开始在那上百个锅旁窜来窜去。\n白小纯唉声叹气，看着那一口口锅，正琢磨选哪一个时，忽然看到了在角落里，放着一口被压在下面的锅。\n这口锅有些特别，不是圆的，而是椭圆形，看起来不像是锅，反倒像是一个龟壳，隐隐可见似乎还有一些黯淡的纹路。\n“咦？”白小纯眼睛一亮，快步走了过去，蹲下身子仔细看了看后，将其搬了出来，仔细看后，目中露出满意。\n他自幼就喜欢乌龟，因为乌龟代表长寿，而他之所以来修仙，就是为了长生，如今一看此锅像龟壳，在他认为，这是很吉利的，是好兆头。\n将这口锅搬出去后，张大胖远远的看到，拿着大勺就跑了过来。\n“九师弟你怎么选这口啊，这锅放在那里不知多少年了，没人用过，因为像龟壳，所以也从来没人选背着它在身上，这个……九师弟你确定？”张大胖拍了拍自己的肚子，好心的劝说。\n“确定，我就要这口锅了。”白小纯越看这口锅越喜欢，坚定道。\n张大胖又劝说一番，眼看白小纯执意如此，便古怪的看了看他，不再多说，为白小纯安排了在这火灶房居住的草屋后，就又忙碌去了。\n此刻天色已到黄昏，白小纯在草屋内，将那口龟形的锅仔细的看了看，发现这口锅的背面，有几十条纹路，只是黯淡，若不细看，很难发现。\n他顿时认为这口锅不凡，将其小心的放在了灶上，这才打量居住的屋舍，这房屋很简单，一张小床，一处桌椅，墙上挂着一面日常所需的铜镜，在他环顾房间时，身后那口平淡无奇的锅上，有一道紫光，一闪而逝！\n对于白小纯来说，这一天发生了很多事情，如今虽然来到了梦寐以求的仙人世界，可他心里终究是有些茫然。\n片刻后，他深吸口气，目中露出期望。\n“我要长生！”白小纯坐在一旁取出杂役处麻脸女子给予的口袋。\n里面有一枚丹药，一把木剑，一根燃香，再就是杂役的衣服与令牌，最后则是一本竹书，书上有几个小字。\n“紫气驭鼎功，凝气篇。”\n黄昏时分，火灶房内张大胖等人忙碌时，屋舍内的白小纯正看着竹书，眼中露出期待，他来到这里是为了长生，而长生的大门，此刻就在他的手中，深呼吸几次后，白小纯打开竹书看了起来。\n片刻后，白小纯眼中露出兴奋之芒，这竹书上有三幅图，按照上面的说法，修行分为凝气与筑基两个境界，而这紫气驭鼎功分为十层，分别对应凝气的十层。\n且每修到一层，就可以驭驾外物为己用，当到了第三层后，可以驾驭重量为小半个鼎的物体，到了第六层，则是大半个鼎，而到了第九层，则是一整尊鼎，至于最终的大圆满，则是可以驾驭重量为两尊鼎的物体。\n只不过这竹书上的功法，只有前三层，余下的没有记录，且若要修炼，还需按照特定的呼吸以及动作，才可以修行这紫气驭鼎功。\n白小纯打起精神，调整呼吸，闭目摆出竹书上第一幅图的动作，只坚持了三个呼吸，就全身酸痛的惨叫一声，无法坚持下去，且那种呼吸方式，也让他觉得气不够用。\n“太难了，上面说这修炼这第一幅图，可以感受到体内有一丝气在隐隐游走，可我这里除了难受，什么都没有感觉到。”白小纯有些苦恼，可为了长生，咬牙再次尝试，就这样磕磕绊绊，直至到了傍晚，他始终没有感受到体内的气。\n他不知道，即便是资质绝佳之人，若没有外力，单纯去修行这紫气驭鼎功的第一层，也需要至少一个月的时间，而他这里才几个时辰，根本就不可能有气感。\n此刻全身酸痛，白小纯伸了个懒腰，正要去洗把脸，突然的，从门外传来阵阵吵闹之声，白小纯把头伸出窗外，立刻看到一个面黄肌瘦的青年，一脸铁青的站在火灶房院子的大门外。\n“是谁顶替了我许宝财的名额，给我滚出来！”\n=========\n正式更新啦！新书如小树苗一样鲜嫩，急需呵护啊，求推荐票，求收藏！！！推荐，推荐，推荐，收藏，收藏，收藏，重要的事，三遍三遍！！！"
+     }
+   }
+   // GET http://chapter2.zhuishushenqi.com/chapter/http%3a%2f%2fbook.my716.com%2fgetBooks.aspx%3fmethod%3dcontent%26bookId%3d1127281%26chapterFile%3dU_1212539_201701211420571844_4093_2.txt?k=2124b73d7e2e1945&t=1468223717
+   // HTTP/1.1 200 OK
+   // Server: marco/0.27
+   // Date: Sun, 16 Apr 2017 14:10:44 GMT
+   // Content-Type: application/json; charset=utf-8
+   // Content-Length: 11082
+   // Connection: keep-alive
+   // Vary: Accept-Encoding
+   // X-Source: C/200
+   // Expires: Mon, 09 Apr 2018 06:39:24 GMT
+   // Cache-Control: max-age=31536000
+   // Age: 631880
+   // X-Cache: MISS from mix-sd-tna-133; HIT from cun-he-tvs-103
+   // X-Request-Id: 98b58f520b8c71e6f11a302d9a3e1911; 2248f1a9bbee7b9e4156be904485da0c
+   // Via: S.mix-sd-tna-140, T.216132.M.1, V.mix-sd-tna-133, T.21599.H.1, M.cun-he-tvs-103
+   // Request duration: 0.099784s
+   #+END_SRC
+
+
+** 章节列表
