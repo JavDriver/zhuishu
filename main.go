@@ -5,35 +5,34 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 )
 
-type N struct {
-	Name string
+type response struct {
+	Ok       bool
+	Keywords []string
 }
 
 func main() {
-	url := "http://cq01-rdqa-dev083.cq01.baidu.com:8030/mshop/app/getfirstpageuserinfo?ucid=20142525"
-	client := &http.Client{}
+	client := http.DefaultClient
 
-	resp, err := client.Get(url)
-	if err != nil {
-		fmt.Println(err)
-		return
+	query := "鹰"
+	query = url.QueryEscape(query)
+
+	resp, e := client.Get("http://api.zhuishushenqi.com/book/auto-complete?query=" + query)
+	if e != nil {
+		fmt.Println(e)
 	}
 	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	body, _ := ioutil.ReadAll(resp.Body)
 
-	var m []N
-	err = json.Unmarshal(body, &m)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	var ret response
+	json.Unmarshal(body, &ret)
 
-	fmt.Printf("%+v", m)
+	if ret.Ok {
+		for _, name := range ret.Keywords {
+			fmt.Println(name)
+		}
+	}
 }
