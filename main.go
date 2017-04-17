@@ -1,38 +1,15 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
-	"net/http"
-	"net/url"
+	"github.com/cabuda/zhuishu/action"
+	"github.com/gin-gonic/gin"
 )
 
-type response struct {
-	Ok       bool
-	Keywords []string
-}
-
 func main() {
-	client := http.DefaultClient
+	router := gin.Default()
 
-	query := "鹰"
-	query = url.QueryEscape(query)
+	router.POST("/book/auto-complete", action.ActionPostAutoComplete)
+	router.POST("/book/fuzzy-search", action.ActionPostFuzzySearch)
 
-	resp, e := client.Get("http://api.zhuishushenqi.com/book/auto-complete?query=" + query)
-	if e != nil {
-		fmt.Println(e)
-	}
-	defer resp.Body.Close()
-
-	body, _ := ioutil.ReadAll(resp.Body)
-
-	var ret response
-	json.Unmarshal(body, &ret)
-
-	if ret.Ok {
-		for _, name := range ret.Keywords {
-			fmt.Println(name)
-		}
-	}
+	router.Run(":8080")
 }
