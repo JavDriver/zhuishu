@@ -2,12 +2,13 @@ package action
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 
-	"github.com/gin-gonic/gin"
+	"log"
+
+	"gopkg.in/gin-gonic/gin.v1"
 )
 
 type ResAutoComplete struct {
@@ -16,8 +17,8 @@ type ResAutoComplete struct {
 }
 
 func ActionPostAutoComplete(c *gin.Context) {
-	name := c.PostForm("name")
-	ret := autoComplete(name)
+	query := c.PostForm("query")
+	ret := autoComplete(query)
 	c.JSON(http.StatusOK, ret)
 }
 
@@ -28,7 +29,7 @@ func autoComplete(query string) gin.H {
 
 	resp, e := client.Get("http://api.zhuishushenqi.com/book/auto-complete?query=" + query)
 	if e != nil {
-		fmt.Println(e)
+		log.Panic(e)
 	}
 	defer resp.Body.Close()
 

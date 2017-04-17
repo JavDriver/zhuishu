@@ -2,16 +2,14 @@ package action
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"net/url"
 	"strconv"
 
-	"fmt"
-
-	"log"
-
-	"github.com/gin-gonic/gin"
+	"gopkg.in/gin-gonic/gin.v1"
 )
 
 type ResFuzzySearch struct {
@@ -28,13 +26,13 @@ type ResFuzzySearch struct {
 }
 
 func ActionPostFuzzySearch(c *gin.Context) {
-	name := c.PostForm("name")
+	query := c.PostForm("query")
 	strStart := c.DefaultPostForm("start", "0")
 	start, _ := strconv.Atoi(strStart)
 	strLimit := c.DefaultPostForm("limit", "10")
 	limit, _ := strconv.Atoi(strLimit)
 
-	ret := fuzzySearch(name, start, limit)
+	ret := fuzzySearch(query, start, limit)
 	c.JSON(http.StatusOK, ret)
 }
 

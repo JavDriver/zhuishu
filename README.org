@@ -1,6 +1,416 @@
 #+TITLE: 追书神器
 
 * api
+** 书名自动补全
+   #+BEGIN_SRC restclient
+     :query := (url-encode-url "雪鹰")
+
+     POST http://localhost:8080/book/auto-complete
+     Content-Type: application/x-www-form-urlencoded
+
+     query=:query
+   #+END_SRC
+
+   #+RESULTS:
+   #+BEGIN_SRC js
+   {
+     "data": {
+       "book_names": [
+         "雪鹰领主"
+       ]
+     },
+     "msg": "ok",
+     "status": 0
+   }
+   // POST http://localhost:8080/book/auto-complete
+   // HTTP/1.1 200 OK
+   // Content-Type: application/json; charset=utf-8
+   // Date: Mon, 17 Apr 2017 16:17:48 GMT
+   // Content-Length: 63
+   // Request duration: 0.042227s
+   #+END_SRC
+
+   
+** 书名模糊查询
+   #+BEGIN_SRC restclient
+     :query := (url-encode-url "雪鹰领主")
+
+     POST http://localhost:8080/book/fuzzy-search
+     Content-Type: application/x-www-form-urlencoded
+
+     query=:query
+
+   #+END_SRC
+
+   #+RESULTS:
+   #+BEGIN_SRC js
+   {
+     "data": {
+       "books": [
+         {
+           "_id": "557e0b2bdcfc794e1a1cd8b2",
+           "Title": "雪鹰领主",
+           "Cat": "玄幻",
+           "Author": "我吃西红柿",
+           "Cover": "/cover/147521131159596",
+           "ShortIntro": "深渊恶魔降临…… 异世界来客潜伏人间…… 神灵们在窥伺这座世界…… 然而，这是夏族统治的世界！夏族的强者们征战四方，巡守天地海洋，灭杀一切威胁！ 这群强者有一个...",
+           "LastChapter": "第1225章 神将们的结局"
+         },
+         {
+           "_id": "58e5f1c816b8a6aa572a352c",
+           "Title": "美女总裁的贴身保镖卢鑫",
+           "Cat": "都市",
+           "Author": "鑫仔峰雪鹰领主",
+           "Cover": "/agent/http://img.17k.com/images/bookcover/default_cover1.jpg",
+           "ShortIntro": "在国外生活的凤凤火火的，有着让所有国家都害怕的势力的卢鑫来到了华夏给一个女总裁当保镖，他……",
+           "LastChapter": "美女"
+         }
+       ]
+     },
+     "msg": "ok",
+     "status": 0
+   }
+   // POST http://localhost:8080/book/fuzzy-search
+   // HTTP/1.1 200 OK
+   // Content-Type: application/json; charset=utf-8
+   // Date: Mon, 17 Apr 2017 16:21:09 GMT
+   // Content-Length: 849
+   // Request duration: 0.133968s
+   #+END_SRC
+
+
+
+** 书籍详情
+   #+BEGIN_SRC restclient
+     :book-id = 557e0b2bdcfc794e1a1cd8b2
+
+     GET http://localhost:8080/book/:book-id
+   #+END_SRC
+
+   #+RESULTS:
+   #+BEGIN_SRC js
+   {
+     "data": {
+       "_id": "557e0b2bdcfc794e1a1cd8b2",
+       "Title": "雪鹰领主",
+       "Author": "我吃西红柿",
+       "LongIntro": "深渊恶魔降临……\r\n异世界来客潜伏人间……\r\n神灵们在窥伺这座世界……\r\n然而，这是夏族统治的世界！夏族的强者们征战四方，巡守天地海洋，灭杀一切威胁！\r\n这群强者有一个共同的名字——超凡生命！\r\n……\r\n在夏族的安阳行省，有一个很小很不起眼的领地，叫——雪鹰领！\r\n故事，就从这里开始！\r\n**\r\n继《莽荒纪》《吞噬星空》《九鼎记》《盘龙》《星辰变》《寸芒》《星峰传说》后，番茄的第八本小说！",
+       "Cover": "/cover/147521131159596",
+       "Cat": "异界大陆",
+       "MajorCate": "玄幻",
+       "MinorCate": "异界大陆",
+       "WordCount": 3265866,
+       "ChaptersCount": 1222,
+       "LastChapter": "第1225章 神将们的结局"
+     },
+     "msg": "ok",
+     "status": 0
+   }
+   // GET http://localhost:8080/book/557e0b2bdcfc794e1a1cd8b2
+   // HTTP/1.1 200 OK
+   // Content-Type: application/json; charset=utf-8
+   // Date: Mon, 17 Apr 2017 16:22:58 GMT
+   // Content-Length: 886
+   // Request duration: 0.017263s
+   #+END_SRC
+
+
+
+** 书籍来源
+   #+BEGIN_SRC restclient
+     :book-id = 557e0b2bdcfc794e1a1cd8b2
+
+     GET http://localhost:8080/book-source/:book-id
+   #+END_SRC
+
+   #+RESULTS:
+   #+BEGIN_SRC js
+   {
+     "data": [
+       {
+         "_id": "56ea51cc7393690a39a1ea77",
+         "Source": "zhuishuvip",
+         "Name": "优质书源",
+         "Link": "http://vip.zhuishushenqi.com/toc/56ea51cc7393690a39a1ea77",
+         "LastChapter": "第1225章 神将们的结局",
+         "ChaptersCount": 1222,
+         "Updated": "2017-04-16T19:15:27.059Z",
+         "Host": "vip.zhuishushenqi.com"
+       },
+       {
+         "_id": "5836b1489ff7f037434e5905",
+         "Source": "sanjiangge",
+         "Name": "三江阁",
+         "Link": "http://www.sanjiangge.com/book/43/43782/index.html",
+         "LastChapter": "第36篇 第27章 神将们的结局",
+         "ChaptersCount": 1242,
+         "Updated": "2017-04-17T08:15:36.315Z",
+         "Host": "sanjiangge.com"
+       },
+       {
+         "_id": "585994dae48a78bc2a8c56b7",
+         "Source": "shuhaha",
+         "Name": "79小说网",
+         "Link": "http://www.79xs.com/Html/Book/123/123138/Index.html",
+         "LastChapter": "第36篇 第27章 神将们的结局",
+         "ChaptersCount": 1241,
+         "Updated": "2017-04-16T20:06:47.801Z",
+         "Host": "79xs.com"
+       },
+       {
+         "_id": "5588738cc7fa46517bbf8cea",
+         "Source": "qingkan",
+         "Name": "请看小说网",
+         "Link": "http://www.qingkan.net/book/xueyinglingzhu/",
+         "LastChapter": "第36篇 第27章 神将们的结局",
+         "ChaptersCount": 1248,
+         "Updated": "2017-04-16T19:32:45.498Z",
+         "Host": "qingkan.net"
+       },
+       {
+         "_id": "571155c9f3ddaf23050e53b4",
+         "Source": "hunhun",
+         "Name": "混混小说网",
+         "Link": "http://www.hunhun520.com/book/xueyinglingzhu/",
+         "LastChapter": "第36篇 第27章 神将们的结局",
+         "ChaptersCount": 1248,
+         "Updated": "2017-04-16T19:32:44.238Z",
+         "Host": "hunhun520.com"
+       },
+       {
+         "_id": "577b490dff26ef986a92960c",
+         "Source": "snwx",
+         "Name": "少年文学网",
+         "Link": "http://www.snwx.com/book/119/119408/",
+         "LastChapter": "第36篇 第27章 神将们的结局",
+         "ChaptersCount": 1248,
+         "Updated": "2017-04-16T19:32:41.628Z",
+         "Host": "snwx.com"
+       },
+       {
+         "_id": "577b477dbd86a4bd3f8bf1b0",
+         "Source": "biquge",
+         "Name": "笔趣阁",
+         "Link": "http://www.biquge.la/book/5094/",
+         "LastChapter": "第36篇 第27章 神将们的结局",
+         "ChaptersCount": 1240,
+         "Updated": "2017-04-16T19:15:55.635Z",
+         "Host": "biquge.la"
+       },
+       {
+         "_id": "5631332ab8582e2f295d315e",
+         "Source": "w69shu",
+         "Name": "69书吧",
+         "Link": "http://www.69shu.com/21135/",
+         "LastChapter": "第36篇 第27章 神将们的结局",
+         "ChaptersCount": 1243,
+         "Updated": "2017-04-16T19:15:54.408Z",
+         "Host": "69shu.com"
+       },
+       {
+         "_id": "570769fe326011945ee8612d",
+         "Source": "my176",
+         "Name": "176小说",
+         "Link": "http://book.my716.com/getBooks.aspx?method=chapterList&bookId=634203",
+         "LastChapter": "第1225章 神将们的结局",
+         "ChaptersCount": 1222,
+         "Updated": "2017-04-16T19:15:34.992Z",
+         "Host": "book.my716.com"
+       },
+       {
+         "_id": "57a192ba3b252f673a656dae",
+         "Source": "xiaoxiaoshuwu",
+         "Name": "小小书屋",
+         "Link": "http://www.xiaoxiaoshuwu.com/modules/article/reader.php?aid=47454",
+         "LastChapter": "第33篇 转世 第54章 一张画（三更完毕）13我吃西红柿",
+         "ChaptersCount": 1131,
+         "Updated": "2017-03-23T20:37:10.585Z",
+         "Host": "xiaoxiaoshuwu.com"
+       },
+       {
+         "_id": "579aee7cf8b5ba6709b9fb4e",
+         "Source": "lewenwu",
+         "Name": "乐文屋",
+         "Link": "http://www.lewenwu.com/books/38/38622/",
+         "LastChapter": "第35篇 第42章 圣主逃窜",
+         "ChaptersCount": 1184,
+         "Updated": "2017-03-22T21:02:11.261Z",
+         "Host": "lewenwu.com"
+       },
+       {
+         "_id": "577b644333724b2877a180ef",
+         "Source": "w365xs",
+         "Name": "365小说",
+         "Link": "http://www.365xs.org/books/38/38622/",
+         "LastChapter": "第35篇 第42章 圣主逃窜",
+         "ChaptersCount": 1184,
+         "Updated": "2017-03-22T18:51:28.583Z",
+         "Host": "365xs.org"
+       },
+       {
+         "_id": "56e79e23c1f25a17556a174b",
+         "Source": "w00xs",
+         "Name": "00小说",
+         "Link": "http://00xs.com/html/46/46953/index.html",
+         "LastChapter": "第31篇 第25章 发现了！",
+         "ChaptersCount": 977,
+         "Updated": "2016-11-12T15:59:36.377Z",
+         "Host": "00xs.com"
+       },
+       {
+         "_id": "577b490dff26ef986a92960b",
+         "Source": "aeasou",
+         "Name": "宜搜小说",
+         "Link": "http://api.easou.com/api/bookapp/chapter_list.m?gid=16120847&nid=1016120847&size=10000&cid=eef_easou_book&version=002&os=android&appverion=1011",
+         "LastChapter": "停更两天调作息",
+         "ChaptersCount": 2611,
+         "Updated": "2016-11-09T12:31:36.160Z",
+         "Host": "api.easou.com"
+       }
+     ],
+     "msg": "ok",
+     "status": 0
+   }
+   // GET http://localhost:8080/book-source/557e0b2bdcfc794e1a1cd8b2
+   // HTTP/1.1 200 OK
+   // Content-Type: application/json; charset=utf-8
+   // Date: Mon, 17 Apr 2017 16:27:43 GMT
+   // Transfer-Encoding: chunked
+   // Request duration: 0.079334s
+   #+END_SRC
+
+
+
+
+
+** 书籍章节
+   #+BEGIN_SRC restclient
+     :source-id = 5836b1489ff7f037434e5905
+
+     GET http://localhost:8080/book-toc/:source-id
+   #+END_SRC
+
+   #+RESULTS:
+   #+BEGIN_SRC js
+   {
+     "data": {
+       "_id": "5836b1489ff7f037434e5905",
+       "Link": "http://www.sanjiangge.com/book/43/43782/index.html",
+       "Name": "三江阁",
+       "Chapters": [
+         {
+           "Title": "第一章 雪鹰领",
+           "Link": "http://www.sanjiangge.com/book/43/43782/18141124.html",
+           "Unreadble": false
+         },
+         {
+           "Title": "第二章 超凡",
+           "Link": "http://www.sanjiangge.com/book/43/43782/18141125.html",
+           "Unreadble": false
+         },
+         {
+           "Title": "第三章 分离",
+           "Link": "http://www.sanjiangge.com/book/43/43782/18141126.html",
+           "Unreadble": false
+         },
+         {
+           "Title": "第36篇 第27章 神将们的结局",
+           "Link": "http://www.sanjiangge.com/book/43/43782/35584600.html",
+           "Unreadble": false
+         }
+       ]
+     },
+     "msg": "ok",
+     "status": 0
+   }
+   // GET http://localhost:8080/book-toc/5836b1489ff7f037434e5905
+   // HTTP/1.1 200 OK
+   // Content-Type: application/json; charset=utf-8
+   // Date: Mon, 17 Apr 2017 16:32:15 GMT
+   // Transfer-Encoding: chunked
+   // Request duration: 0.247030s
+   #+END_SRC
+
+
+
+** 书籍混源章节
+   #+BEGIN_SRC restclient
+     :book-id = 557e0b2bdcfc794e1a1cd8b2
+
+     GET http://localhost:8080/book-mix-toc/:book-id
+   #+END_SRC
+
+   #+RESULTS:
+   #+BEGIN_SRC js
+   {
+     "data": {
+       "_id": "557e35d6e8e4599f7b3f7d8d",
+       "Book": "557e0b2bdcfc794e1a1cd8b2",
+       "Chapters": [
+         {
+           "Title": "第一章 雪鹰领",
+           "Link": "http://www.sanjiangge.com/book/43/43782/18141124.html",
+           "Unreadble": false
+         },
+         {
+           "Title": "第二章 超凡",
+           "Link": "http://www.sanjiangge.com/book/43/43782/18141125.html",
+           "Unreadble": false
+         },
+         {
+           "Title": "第三章 分离",
+           "Link": "http://www.sanjiangge.com/book/43/43782/18141126.html",
+           "Unreadble": false
+         },
+         {
+           "Title": "第36篇 第26章 对付皇级",
+           "Link": "http://www.snwx.com/book/119/119408/42345011.html",
+           "Unreadble": false
+         }
+       ]
+     },
+     "msg": "ok",
+     "status": 0
+   }
+   // GET http://localhost:8080/book-mix-toc/557e0b2bdcfc794e1a1cd8b2
+   // HTTP/1.1 200 OK
+   // Content-Type: application/json; charset=utf-8
+   // Date: Mon, 17 Apr 2017 16:34:25 GMT
+   // Transfer-Encoding: chunked
+   // Request duration: 0.286893s
+   #+END_SRC
+
+
+
+** 章节内容
+   #+BEGIN_SRC restclient
+     POST http://localhost:8080/book-chapter
+     Content-Type: application/x-www-form-urlencoded
+
+     name=%E9%9B%AA%E9%B9%B0&chapter_link=http%3A%2F%2Fwww.sanjiangge.com%2Fbook%2F43%2F43782%2F18141124.html
+   #+END_SRC
+
+   #+RESULTS:
+   #+BEGIN_SRC js
+   {
+     "data": {
+       "Title": "第一章 雪鹰领",
+       "Body": "龙山历9616年，冬。\n安阳行省，青河郡，仪水县城境内。\n一名唇红齿白约莫*岁的男孩，穿着剪裁精致的白色毛皮衣，背着一矛囊，正灵活的飞窜在山林间，右手也持着一根黑色木柄短矛，追逐着前方的一头仓皇逃窜的野鹿，周围的树叶震动积雪簌簌而落。\n“着！”\n飞窜中的男孩猛然高举短矛，身体微微往后仰，腰腹力量传递到右臂，猛然一甩！\n刷！\n手中短矛破空飞出，擦着一些树叶，穿过三十余米距离，从野鹿背部边缘一擦而过，而后扎入雪地深处，仅仅在野鹿背部留下一道血痕，野鹿顿时更加拼命跑，朝山林深处钻去，眼看着就要跑丢。\n忽然嗖的一声，一颗石头飞出。\n石头化作流光穿行在山林间，飞过上百米距离，砰的声，贯穿了一株大树的树干，精准的射入了那头野鹿的头颅内，那野鹿坚硬的头骨也抵挡不住，踉跄着靠着惯性飞奔出十余米便轰然倒地，震的周围的无数积雪簌簌而落。\n“父亲。”男孩转头看向远处，有些无奈道，“你别出手啊，我差点就能射中它了。”\n“我不出手，那野鹿就跑没了。高速飞奔中你的短矛准头还差些，今天傍晚回去加练五百次短矛。”声音雄浑，远远传来，远处两道身影正并肩走来。\n一名是颇为壮硕的黑发黑眼中年男子，身后背负着一兵器箱。另外一道身影却是更加魁梧壮硕，高过两米，手臂比常人大腿还粗，可他却有着狮子般的脑袋，正是狮首人躯！凌乱的黄色头发披散着，这赫然便是颇为少见的兽人中的‘狮人’，他同样背着一兵器箱。\n“铜三老弟，你看我儿子厉害吧，今年才八岁，已经有寻常成年男子的力气了。”中年男子笑道。\n“嗯，雪鹰是不错，将来比你强是没问题的。”狮人壮汉打趣道。\n“当然比我厉害，我八岁的时候还穷哈哈的和村里小孩玩闹，啥都不懂呢，还是后来进入军队才有机会修炼斗气！”中年男子感慨道，“我这个当父亲的，给不了儿子太过好的条件，不过能给的，我都会倾力给他，好好栽培他。”\n“东伯，你能从一个平民，成为一名天阶骑士，更能买下领地成为一名贵族，已经很厉害了。”狮人壮汉笑道。\n这中年男子正是周围过百里领地的领主——男爵东伯烈！\n男爵是夏族帝国‘龙山帝国’最低的一个贵族爵位，在帝国建国时，贵族爵位授予还很严格，如今帝国建立至今已经九千多年，这个庞然大物开始腐朽，一些低爵位买卖甚至都是官方允许。\n当初东伯烈和妻子因为有了孩子，才决定买下贵族爵位，买下一块领地，这块领地更是起名为——雪鹰领！和他们的儿子同名，可见对这儿子的疼爱。\n当然这仅仅只是仪水县内的一块小领地。\n“我二十岁才修炼出斗气，可我儿子不同，他今年才八岁，我估摸着十岁左右就能修炼出斗气，哈哈，肯定比我强多了。”东伯烈看着那男孩，眼中满是父亲对儿子的宠溺和期待。\n“看他的力气，十岁左右是差不多了。”狮人壮汉也赞同。\n他们经历的太多太多了，眼光自然很准。\n“父亲，你在那么远，扔的石头都能贯穿这么粗的大树？”男孩正站在那一株大树旁，双手去抱，竟然都无法完全抱住，这大树的树干上却被贯穿出一个大窟窿，“这么粗的大树啊，让我慢慢砍，都要砍上好久好久。”\n“知道天阶骑士的厉害了吧。”狮人壮汉说道，旁边东伯烈也得意一笑，在儿子面前当父亲的还是喜欢显摆显摆的。\n“有神厉害吗？”男孩故意撇嘴。\n“神？”\n东伯烈、狮人铜三顿时无语。\n龙山帝国的开创者‘龙山大帝’就是一位强大的神灵，这是这个世界几乎所有子民都知道的，东伯烈在军队中也算一员猛将了，可和神灵相比？根本没法比啊。\n“看来今天傍晚加练五百次短矛，还是少了，嗯，就加练一千次吧。”东伯烈砸着嘴巴说道。\n“父亲！”男孩瞪大眼睛，“你，你……”\n“看你还敢跟我拌嘴，要记住，和你父亲拌嘴，你只会吃亏，好了，回了回了。”东伯烈说道。\n狮人壮汉‘铜三’从脖子中取出一乌笛，放在嘴边吹出了低沉的声音，声音在山林间传播。\n很快远处有二十名穿着甲铠的士兵迅速赶来。\n“将猎物带回去。”东伯烈吩咐道。\n“是，领主大人。”士兵们都恭敬应命。\n东伯烈、狮人壮汉带着男孩雪鹰走到了这座山的最高处，这里正有着些大量的马匹以及近百名士兵，一片空旷的雪地上正铺着巨大的白色毛毯，毛毯上正有坐着一名气息神秘超然的紫袍女子，紫袍女子的身边是一名可爱的奔跑还踉踉跄跄的两三岁孩童，那些士兵们看向紫袍女子的目光中有着敬畏。\n因为这紫袍女子是一名强大的法师！\n“石头，快看，谁来了。”紫袍女子笑着说道，那两三岁孩童立即转头看去，一看就眼睛亮了。\n“哥哥抱，哥哥抱。”孩童扭着屁股飞奔过去。\n紫袍女子也微笑看着这一幕。\n“石头。”男孩雪鹰立即走到了最前面蹲下，弟弟青石飞扑到他的怀里：“哥哥抱，哥哥抱。”\n雪鹰抱起了弟弟，亲了下弟弟。\n“石头，今天猎到一头野鹿哦，你看。”雪鹰指着后面士兵抬着的野鹿。\n“夜炉？夜炉？”弟弟青石瞪大着乌溜溜的眼睛，嘴里发出不清晰的声音。\n弟弟‘东伯青石’才两岁，虽然努力说话，可说话还不够清晰，也不太懂意思。\n“是野鹿，我们家后山中的一种野兽。”雪鹰说道。\n“雪鹰，把弟弟给我吧。”紫袍女子也起身走来。\n“是，母亲。”雪鹰将弟弟递过去。\n紫袍女子说道：“我带了些桂花糕点还热着，就在篮子里，赶紧去吃吧。”\n“糕点？”雪鹰眼睛一亮一时间口水分泌，感觉口水都快流出来了，立即飞奔着过去。\n“我也要吃，我也要吃。”弟弟青石立即在母亲怀里挣扎了，提到‘吃糕点’他才是最积极的，平常吃饭反而很不听话。\n“当然有你的，你这个小馋嘴。”紫袍女子看了外面也走进来的东伯烈和狮人铜三，“你们俩也快点，也给你准备了些吃的。”\n“哈哈……主人不但法术厉害，这厨艺也好啊。”狮人壮汉说道。\n这狮人在年少时曾是奴隶，成为了紫袍女子的仆从追随，虽然多年过去，彼此感情也仿佛亲人，可狮人壮汉依旧坚持喊‘主人’。\n……\n雪鹰吃饱喝足后朝远处看去，因为他们露营的地方就是在山顶，一眼看去，远处也有一些山，也有许多农地，目光所至，都是自家的领地。父亲和母亲当年就是因为自己的出生，才停止了冒险的日子，买下贵族爵位，买下了一大片领地，这片领地都被起名为——雪鹰领！\n东伯雪鹰伸了个懒腰，满脸开心。\n有疼爱自己的父亲母亲，有可爱的弟弟，有许多善意的领地子民。\n对这样的日子，东伯雪鹰真的太满意了……\n唯一让他有些头疼的，就是父亲的训练有些太苦了。\n“要加练一千次短矛，加上原有的一千次……还有更主要的枪法，还有……”东伯雪鹰的小脸都成苦瓜脸了。\n******\n夜幕降临，残月悬空。\n风在呼啸。\n“轰~~~”\n在距离地面数千米的高空中，仿佛一片乌云的巨大的鸟在高速飞行着。\n这一头巨大的鸟，翼展过二十米，有着足足四个翅膀，它飞行的速度达到了近音速的地步，正是一头极凶戾的可怕魔兽‘四翼秃鹫’，在这头四翼秃鹫背上正盘膝坐着两道身影，一名银甲男子，以及一名持着暗紫色木杖的灰袍人。\n“到哪了？”灰袍人问道。\n“禀主人，已经进入仪水县境内，估计还有半个时辰就能抵达雪鹰领。”银甲男子俯瞰下方，目光冰冷，清晰辨别下方位置。\n“还有半个时辰，我就能看到我那位妹妹了。”灰袍人声音很复杂，“真的很能躲啊，在我们家族的追查下，躲了足足十五年……”\n四翼秃鹫在黑夜中，直奔雪鹰领！\n——————\n番茄新书正式发布！\n呼，又要开始一个崭新的世界了，还请大家记得收藏、推荐啊~~~\n**\nX2402161"
+     },
+     "msg": "ok",
+     "status": 0
+   }
+   // POST http://localhost:8080/book-chapter
+   // HTTP/1.1 200 OK
+   // Content-Type: application/json; charset=utf-8
+   // Date: Mon, 17 Apr 2017 17:00:03 GMT
+   // Transfer-Encoding: chunked
+   // Request duration: 0.048409s
+   #+END_SRC
+
+
+
+* 原始api
 ** 自动补全书名
    #+BEGIN_SRC restclient
      :query = 雪鹰
