@@ -53,9 +53,8 @@ func FuzzySearchBook(query string, start, limit int) []BookSummary {
 	client := http.DefaultClient
 
 	query = url.QueryEscape(query)
-	url := fmt.Sprintf("http://api.zhuishushenqi.com/book/fuzzy-search?query=%s&start=%d&limit=%d", query, start, limit)
 
-	resp, e := client.Get(url)
+	resp, e := client.Get(fmt.Sprintf("http://api.zhuishushenqi.com/book/fuzzy-search?query=%s&start=%d&limit=%d", query, start, limit))
 	if e != nil {
 		log.Panic(e)
 	}
@@ -99,9 +98,8 @@ func GetBookDetail(bookId string) BookDetail {
 	client := http.DefaultClient
 
 	bookId = url.QueryEscape(bookId)
-	url := fmt.Sprintf("http://api.zhuishushenqi.com/book/%s", bookId)
 
-	resp, e := client.Get(url)
+	resp, e := client.Get(fmt.Sprintf("http://api.zhuishushenqi.com/book/%s", bookId))
 	if e != nil {
 		log.Panic(e)
 	}
@@ -134,9 +132,7 @@ func GetBookSource(bookId string) []BookSource {
 
 	bookId = url.QueryEscape(bookId)
 
-	url := fmt.Sprintf("http://api.zhuishushenqi.com/toc?view=summary&book=%s", bookId)
-
-	resp, e := client.Get(url)
+	resp, e := client.Get(fmt.Sprintf("http://api.zhuishushenqi.com/toc?view=summary&book=%s", bookId))
 	if e != nil {
 		log.Panic(e)
 	}
@@ -161,10 +157,9 @@ type TocInfo struct {
 // 获取章节列表
 func GetBookToc(sourceId string) TocInfo {
 	sourceId = url.QueryEscape(sourceId)
-	url := fmt.Sprintf("http://api.zhuishushenqi.com/toc/%s?view=chapters", sourceId)
 
 	client := http.DefaultClient
-	resp, e := client.Get(url)
+	resp, e := client.Get(fmt.Sprintf("http://api.zhuishushenqi.com/toc/%s?view=chapters", sourceId))
 	if e != nil {
 		log.Panic(e)
 	}
@@ -181,10 +176,9 @@ func GetBookToc(sourceId string) TocInfo {
 // 获取混合章节列表
 func GetBookMixToc(bookId string) TocInfo {
 	bookId = url.QueryEscape(bookId)
-	url := fmt.Sprintf("http://api.zhuishushenqi.com/mix-toc/%s", bookId)
 
 	client := http.DefaultClient
-	resp, e := client.Get(url)
+	resp, e := client.Get(fmt.Sprintf("http://api.zhuishushenqi.com/mix-toc/%s", bookId))
 	if e != nil {
 		log.Panic(e)
 	}
@@ -211,12 +205,12 @@ type ChapterInfo struct {
 	Body  string
 }
 
+// 获取章节内容
 func GetChapterInfo(chapterLink string) ChapterInfo {
 	client := http.DefaultClient
 	chapterLink = url.QueryEscape(chapterLink)
-	url := fmt.Sprintf("http://chapter2.zhuishushenqi.com/chapter/%s?k=2124b73d7e2e1945&t=1468223717", chapterLink)
 
-	resp, e := client.Get(url)
+	resp, e := client.Get(fmt.Sprintf("http://chapter2.zhuishushenqi.com/chapter/%s?k=2124b73d7e2e1945&t=1468223717", chapterLink))
 	if e != nil {
 		log.Panic(e)
 	}
