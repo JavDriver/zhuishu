@@ -1,0 +1,25 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "6C0OqC3SnM7aMFU7hZJQkb8a4lY=",
+			"path": "github.com/jroimartin/gocui",
+			"revision": "4f518eddb04b8f73870836b6d1941e8aa3c06637",
+			"revisionTime": "2017-08-27T14:52:36Z"
+		},
+		{
+			"checksumSHA1": "cJE7dphDlam/i7PhnsyosNWtbd4=",
+			"path": "github.com/mattn/go-runewidth",
+			"revision": "97311d9f7767e3d6f422ea06661bc2c7a19e8a5d",
+			"revisionTime": "2017-05-10T07:48:58Z"
+		},
+		{
+			"checksumSHA1": "Zi8hWUMkKtii1fc6YaGgoYAssIw=",
+			"path": "github.com/nsf/termbox-go",
+			"revision": "aa4a75b1c20a2b03751b1a9f7e41d58bd6f71c43",
+			"revisionTime": "2017-11-04T16:23:16Z"
+		}
+	],
+	"rootPath": "github.com/cabuda/zhuishu"
+}
