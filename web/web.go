@@ -1,9 +1,9 @@
 package main
 
 import (
-	"net/http"
 	"io"
 	"log"
+	"net/http"
 )
 
 func main() {
@@ -11,7 +11,7 @@ func main() {
 		io.WriteString(w, "hello world")
 	})
 
-	err := http.ListenAndServe("8080", nil)
+	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatalln(err)
 	}
